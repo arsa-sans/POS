@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class order_detail extends Model
+class OrderDetail extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderDetailFactory> */
     use HasFactory;
     public function order()
     {
-        return $this->hasMany(order::class);
+        return $this->hasMany(Order::class);
     }
     public function product()
     {
-        return $this->hasMany(product::class);
+        return $this->hasMany(Product::class);
     }
     
 }
