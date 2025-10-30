@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Customer;
 use App\Http\Requests\StoreorderRequest;
 use App\Http\Requests\UpdateorderRequest;
 
@@ -13,7 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $data['categories'] = Category::get();
+        $data['customers'] = Customer::get();
+        return view('order.index')->with($data);
     }
 
     /**

@@ -203,9 +203,9 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href=" {{ url('/buku') }}" class="nav-link">
+                    <a href=" {{ url('/beranda') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Buku</p>
+                      <p>Beranda</p>
                     </a>
                   </li>
                 </ul>
@@ -319,9 +319,11 @@
         }
       });
     </script>
+    <script src="{{ asset('/js/jquery-3.7.1.min.js') }}"></script>
     <!--end::OverlayScrollbars Configure-->
 
     <!-- OPTIONAL SCRIPTS -->
+     @stack('script')
 
     <!-- sortablejs -->
     <script
