@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Customer;
-use App\Http\Requests\StoreorderRequest;
-use App\Http\Requests\UpdateorderRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Exception;
+use PDOException;
 
 class OrderController extends Controller
 {
@@ -32,9 +36,40 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreorderRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'order_payload' => 'required|string',
+        ]);
+
+        $payload = json_decode($validated['order_payload'], true);
+        if(!$payload || empty($payload['items'])) {
+            return redirect()->back()->with('error', 'No items in order');
+        }
+
+        DB::beginTransaction();
+        try {
+            $order = new Order();
+            $order->invoice = 'INV'.time();
+            $order->total = $payload['total'] ?? array_sum(array_column($payload['items'], 'price'));
+            $order->user_id = Auth::id() ?? 1;
+            $order->customer_id = $validated['customer_id'];
+            $order->save();
+            foreach($payload['items'] as $item) {
+                $detail = new OrderDetail();
+                $detail->order_id = $order->id;
+                $detail->product_id = $item['id'];
+                $detail->quantity = $item['qty'];
+                $detail->price = $item['price'];
+                $detail->save();
+            }
+            DB::commit();
+            return redirect()->route('order.print', $order->id)->with('success', 'Order created successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to create order: ' . $e->getMessage());
+        }
     }
 
     /**

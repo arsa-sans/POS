@@ -49,7 +49,7 @@
             console.log(orderedList)
         })
         $('#order-form').on('submit', function(e){
-            if(orderedList.length === 0){
+            if(orderedList.length == 0){
                 e.preventDefault()
                 alert('Keranjang belanja masih kosong!')
                 return false

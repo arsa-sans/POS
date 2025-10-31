@@ -1,4 +1,4 @@
-<form action="{{ url('order') }}">
+<form action="{{ url('order') }}" id="order-form" method="POST">
   @csrf
   <div class="mb-2">
     <label for="customer_id" class="form-label">Pelanggan</label>
