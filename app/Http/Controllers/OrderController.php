@@ -72,6 +72,18 @@ class OrderController extends Controller
         }
     }
 
+    public function print(Order $order)
+    {
+        $details = \App\Models\OrderDetail::where('order_id', $order->id)->get();
+        $productIds = $details->pluck('product_id')->unique()->toArray();
+        $products = \App\Models\Product::whereIn('id', $productIds)->get()->keyBy('id');
+        return view('order.print', [
+            'order' => $order,
+            'details' => $details,
+            'products' => $products,
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

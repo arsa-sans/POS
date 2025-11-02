@@ -13,8 +13,8 @@
         function refreshCartState(){
             const totalSum = orderedList.reduce((s, it) => s + Number(it.price), 0)
             $('#total-cell').text(fmtRp(totalSum))
-            $('#order-payload').val(JSON.stringify({items: orderedList, total: totalSum, qty: orderedList.length}))
-            $submitBtn.prop('disabled', orderedList.length === 0)
+            $('#order-payload').val(JSON.stringify({items: orderedList, total: totalSum}))
+            $submitBtn.prop('disabled', orderedList.length == 0)
         }
         $submitBtn.prop('disabled', true)
 
@@ -35,7 +35,7 @@
                 <td class="price">${fmtRp(price)}</td>
                 </tr>`
                 $('#tbl-cart tbody').append(order)
-            }else {
+            } else {
                 const index = orderedList.findIndex(list => list.id == id)
                 orderedList[index].qty += 1
                 orderedList[index].price = orderedList[index].qty * orderedList[index].unitPrice
