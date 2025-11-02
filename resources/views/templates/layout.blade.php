@@ -323,7 +323,7 @@
     <!--end::OverlayScrollbars Configure-->
 
     <!-- OPTIONAL SCRIPTS -->
-     @stack('script')
+    @stack('script')
 
     <!-- sortablejs -->
     <script

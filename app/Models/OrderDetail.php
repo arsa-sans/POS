@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderDetailFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'quantity',
+        'price',
+    ];
+
     public function order()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
-    public function product()
-    {
-        return $this->hasMany(Product::class);
-    }
-    
 }

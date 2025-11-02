@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+use App\Http\Requests\StoreorderRequest;
+use App\Http\Requests\UpdateorderRequest;
 use App\Models\Category;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
@@ -38,51 +42,72 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'order_payload' => 'required|string',
-        ]);
+        \Log::info('STORE DIPANGGIL');
+        \Log::info($request->all());
 
-        $payload = json_decode($validated['order_payload'], true);
-        if(!$payload || empty($payload['items'])) {
-            return redirect()->back()->with('error', 'No items in order');
+        $payload = json_decode($request->order_payload, true);
+
+        if (!$payload || empty($payload['items'])) {
+            return back()->with('error', 'Tidak ada item dalam pesanan.');
         }
 
         DB::beginTransaction();
         try {
-            $order = new Order();
-            $order->invoice = 'INV'.time();
-            $order->total = $payload['total'] ?? array_sum(array_column($payload['items'], 'price'));
-            $order->user_id = Auth::id() ?? 1;
-            $order->customer_id = $validated['customer_id'];
-            $order->save();
-            foreach($payload['items'] as $item) {
-                $detail = new OrderDetail();
-                $detail->order_id = $order->id;
-                $detail->product_id = $item['id'];
-                $detail->quantity = $item['qty'];
-                $detail->price = $item['price'];
-                $detail->save();
+            // Buat invoice unik
+            $invoice = 'INV-' . now()->format('YmdHis');
+
+            // Simpan ke tabel orders
+
+            $customers = Customer::find($request->name);
+            
+            $order = Order::create([
+                'invoice'     => $invoice,
+                'customer_id' => $request->customer_id,
+                'user_id'     => Auth::id(), // ✅ tambahkan ini
+                'name'        => $request->name,
+                'total'       => $payload['total'],
+                'created_at'  => Carbon::now(),
+            ]);
+
+
+            // Simpan ke tabel order_details
+            foreach ($payload['items'] as $item) {
+                OrderDetail::create([
+                    'order_id'   => $order->id,
+                    'product_id' => $item['id'],
+                    'quantity'   => $item['qty'],
+                    'price'      => $item['unitPrice'],
+                ]);
             }
+
             DB::commit();
-            return redirect()->route('order.print', $order->id)->with('success', 'Order created successfully');
+
+            Log::info('ORDER BERHASIL DISIMPAN', ['order_id' => $order->id]);
+
+            return redirect()->route('order.print', $order->id)
+                            ->with('success', 'Transaksi berhasil disimpan!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Failed to create order: ' . $e->getMessage());
+            Log::error('ERROR SIMPAN ORDER: ' . $e->getMessage());
+            return back()->with('error', 'Gagal menyimpan order.');
         }
     }
 
     public function print(Order $order)
-    {
-        $details = \App\Models\OrderDetail::where('order_id', $order->id)->get();
-        $productIds = $details->pluck('product_id')->unique()->toArray();
-        $products = \App\Models\Product::whereIn('id', $productIds)->get()->keyBy('id');
-        return view('order.print', [
-            'order' => $order,
-            'details' => $details,
-            'products' => $products,
-        ]);
-    }
+{
+    // Ambil semua detail order
+    $details = OrderDetail::where('order_id', $order->id)->get();
+
+    // Ambil produk yang terlibat
+    $productIds = $details->pluck('product_id')->unique()->toArray();
+    $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+    return view('order.print', [
+        'order' => $order->load('customer'), // ✅ pastikan customer ikut di-load
+        'details' => $details,
+        'products' => $products,
+    ]);
+}
 
     /**
      * Display the specified resource.

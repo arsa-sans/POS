@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('invoice')->unique();
             $table->foreignId('customer_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->integer('total');
             $table->timestamps();
         });

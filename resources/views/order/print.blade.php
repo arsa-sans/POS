@@ -5,8 +5,8 @@
     <div class="card">
       <div class="card-body">
         <h4>Invoice: {{ $order->invoice }}</h4>
-        <p><strong>Pelanggan:</strong> {{  $order->customer_id}}</p>
-        <p><strong>Tanggal:</strong> {{  $order->created_at}}</p>
+        <p><strong>Pelanggan :</strong> {{  $order->customer->name ?? 'Tidak Diketahui'}}</p>
+        <p><strong>Tanggal :</strong> {{  $order->created_at}}</p>
 
         <table class="table table-sm">
           <thead>
@@ -32,7 +32,7 @@
             </tr>
         </table>
         <div class="mt-3">
-          <a href="{{ url('order') }}" class="btn btn-secondary btn-sm">Kembali</a>
+          <a href="{{ url('beranda') }}" class="btn btn-secondary btn-sm">Kembali</a>
           <button id="print-now" class="btn btn-primary btn-sm">Print</button>
         </div>
       </div>

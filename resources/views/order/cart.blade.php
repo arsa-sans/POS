@@ -1,33 +1,25 @@
-<form action="{{ url('order') }}" id="order-form" method="POST">
-  @csrf
-  <div class="mb-2">
-    <label for="customer_id" class="form-label">Pelanggan</label>
-    <select name="customer_id" id="customer_id" class="form-select form-select-sm">
-      @foreach($customers as $c)
-        <option value="{{ $c->id }}">{{ $c->name }}</option>
-      @endforeach
-    </select>
-  </div>
+<form id="order-form" action="{{ route('order.store') }}" method="POST">
+    @csrf
+    <div class="form-group">
+        <label for="customer_id">Pelanggan</label>
+        <select id="customer_id" name="customer_id" class="form-control">
+            @foreach($customers as $cust)
+                <option value="{{ $cust->id }}">{{ $cust->name }}</option>
+            @endforeach
+        </select>
+    </div>
 
-  <table class="table table-sm align-middle" id="tbl-cart">
-    <thead>
-      <tr>
-        <th>Produk</th>
-        <th>Qty</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="2" class="text-end"><strong>Total</strong></td>
-        <td id="total-cell">0</td>
-      </tr>
-    </tfoot>
-  </table>
-  <input type="hidden" name="order_payload" id="order-payload" value="">
-  <button type="submit" id="submit-order" class="btn btn-success">Submit Order</button>
+    <input type="hidden" id="order-payload" name="order_payload">
 
+    <table id="tbl-cart" class="table">
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">Total</td>
+                <td id="total-cell">Rp 0</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <button type="submit" id="submit-order" class="btn btn-success">Submit Order</button>
 </form>

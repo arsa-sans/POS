@@ -7,10 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    /** @use HasFactory<\Database\Factories\OrderFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'invoice',
+        'customer_id',
+        'total',
+    ];
+
+    public function details()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 }
+
