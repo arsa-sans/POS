@@ -26,4 +26,10 @@ class UpdatecategorieRequest extends FormRequest
             'description' => 'nullable|string',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama Kategori wajib diisi.',
+        ];
+    }
 }

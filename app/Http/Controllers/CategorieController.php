@@ -37,7 +37,7 @@ class CategorieController extends Controller
         try {
             Category::create($request->validated());
             DB::commit();
-            return redirect('categories')->with('success', 'Data buku berhasil ditambahkan.');
+            return redirect('categories')->with('success', 'Kategori berhasil ditambahkan.');
         } catch (Exception | PDOException $e) {
             DB::rollBack();
             return redirect('categories')->with('error', $e->getMessage());
@@ -71,7 +71,7 @@ class CategorieController extends Controller
             $categories = Category::findOrfail($id);
             $categories->update($request->validated());
             DB::commit();
-            return redirect('categories')->with('success', 'Data buku berhasil diperbarui.');
+            return redirect('categories')->with('success', 'Kategori berhasil diperbarui.');
         } catch (Exception | PDOException $e) {
             DB::rollBack();
             return redirect('categories')->with('error', $e->getMessage());
@@ -88,7 +88,7 @@ class CategorieController extends Controller
             $category = Category::findOrFail($id);
             $category->delete();
             DB::commit();
-            return redirect('categories')->with('success', 'Data buku berhasil dihapus.');
+            return redirect('categories')->with('success', 'Kategori berhasil dihapus.');
         } catch (Exception | PDOException $e) {
             DB::rollBack();
             return redirect('categories')->with('error', $e->getMessage());

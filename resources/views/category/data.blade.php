@@ -12,7 +12,7 @@
   <tr>
     <td>{{ $no++ }}</td>
     <td>{{ $ct->name }}</td>
-    <td>{{ $ct->description }}</td>
+    <td>{{ $ct->description ?? '-' }}</td>
     <td align="center">
       <form action="{{ route('category.edit', $ct->id) }}" method="GET" style="display:inline;">
         <button type="submit" class="btn btn-warning btn-sm">Edit</button>
@@ -30,7 +30,7 @@
         data-bs-toggle="modal" 
         data-bs-target="#confirmDeleteModal"
         data-id="{{ $ct->id }}">
-      Hapus
+      Delete
       </button>
     </td>
   </tr>
