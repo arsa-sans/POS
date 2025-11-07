@@ -12,10 +12,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-    public function testing(){
-        $categories = Category::get();
-        $products = Product::with('category')->get();
-        dd($products[0]->category->name);
-    }
 }

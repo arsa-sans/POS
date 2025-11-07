@@ -169,7 +169,7 @@
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">Library App</span>
+            <span class="brand-text fw-light">POS</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->
@@ -205,7 +205,13 @@
                   <li class="nav-item">
                     <a href=" {{ url('/beranda') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
-                      <p>Beranda</p>
+                      <p>Home</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href=" {{ url('/categories') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Category</p>
                     </a>
                   </li>
                 </ul>
