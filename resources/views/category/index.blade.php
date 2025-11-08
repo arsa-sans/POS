@@ -9,6 +9,17 @@
   @extends('templates.layout')
 
   @section('content')
+  @if(session('error'))
+  <div class="alert alert-danger">
+      {{ session('error') }}
+  </div>
+  @endif
+
+  @if(session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
   <h1>Kategori</h1>
   <div>
     <a href=" {{ url('categories/create') }} " class="btn btn-secondary">+ Add Category</a>
