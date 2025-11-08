@@ -214,6 +214,12 @@
                       <p>Category</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href=" {{ url('/products') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Product</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <!--end::Sidebar Menu-->
