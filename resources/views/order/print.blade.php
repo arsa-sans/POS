@@ -41,11 +41,11 @@
 @endsection
 @push('script')
 <script>
-  window.addEventListener('load', function(){
-    setTimeout(function(){
-      window.print()
-    }, 300)
-  })
+  // window.addEventListener('load', function(){
+  //   setTimeout(function(){
+  //     window.print()
+  //   }, 100)
+  // })
   document.getElementById('print-now').addEventListener('click', function(){
     window.print()
   });
