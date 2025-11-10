@@ -13,6 +13,7 @@
   <main>
     @section('content')
       <h1>Selamat Datang!</h1>
+      <p>Ini adalah halaman dashboard aplikasi POS sederhana.</p>
     @endsection
   </main>
 </body>

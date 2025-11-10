@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ReportController;
 
 // route order
 Route::get('/', [HomeController::class, 'index']);
@@ -37,3 +38,6 @@ Route::post('/customer', [CustomerController::class, 'store']);
 Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
 Route::post('/customers/{id}/update', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+// route report
+Route::get('/report/daily', [ReportController::class, 'daily'])->name('report.daily');

@@ -191,7 +191,7 @@
                 <a href="#" class="nav-link active">
                   <i class="nav-icon bi bi-speedometer"></i>
                   <p>
-                    Dashboard
+                    Menu
                     <i class="nav-arrow bi bi-chevron-right"></i>
                   </p>
                 </a>
@@ -224,6 +224,12 @@
                     <a href=" {{ url('/customers') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Customers</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href=" {{ url('/report/daily') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Report</p>
                     </a>
                   </li>
                 </ul>
