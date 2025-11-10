@@ -1,25 +1,33 @@
-@extends('templates.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Daily</title>
+</head>
+<body>
+  @extends('templates.layout')
 
 @section('content')
 <div class="container mt-4">
   <div class="card shadow-sm">
     <div class="card-body">
-      <h4 class="mb-3">📅 Laporan Penjualan: {{ $date }}</h4>
+      <h4 class="mb-3">Laporan Penjualan: {{ $date }}</h4>
 
       <div class="row text-center mb-3">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="p-3 bg-light rounded shadow-sm">
             <h6>Total Transaksi</h6>
             <h5 class="fw-bold">{{ $totalOrders }}</h5>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="p-3 bg-light rounded shadow-sm">
             <h6>Produk Terjual</h6>
             <h5 class="fw-bold">{{ $totalItems }}</h5>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="p-3 bg-light rounded shadow-sm">
             <h6>Pendapatan</h6>
             <h5 class="fw-bold text-success">Rp {{ number_format($totalSales, 0, ',', '.') }}</h5>
@@ -100,3 +108,5 @@
   document.getElementById('print-now').addEventListener('click', printCardOnly);
 </script>
 @endpush
+</body>
+</html>
