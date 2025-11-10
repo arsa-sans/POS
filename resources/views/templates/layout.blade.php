@@ -197,7 +197,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link">
+                    <a href="{{ url('/home') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Dashboard</p>
                     </a>
@@ -230,6 +230,12 @@
                     <a href=" {{ url('/report/daily') }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Report</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href=" {{ url('/') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Logout</p>
                     </a>
                   </li>
                 </ul>

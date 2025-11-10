@@ -7,9 +7,10 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AuthController;
 
 // route order
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);
 Route::get('/test', [HomeController::class, 'testing']);
 Route::get('/beranda', [OrderController::class, 'index']);
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
@@ -41,3 +42,9 @@ Route::delete('/customer/{id}', [CustomerController::class, 'destroy'])->name('c
 
 // route report
 Route::get('/report/daily', [ReportController::class, 'daily'])->name('report.daily');
+
+// route auth
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/', [AuthController::class, 'login'])->name('login.post');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
