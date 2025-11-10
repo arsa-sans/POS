@@ -220,6 +220,12 @@
                       <p>Product</p>
                     </a>
                   </li>
+                  <li class="nav-item">
+                    <a href=" {{ url('/customers') }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Customers</p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <!--end::Sidebar Menu-->

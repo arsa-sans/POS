@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 
 // route order
 Route::get('/', [HomeController::class, 'index']);
@@ -28,3 +29,11 @@ Route::post('/product', [ProductController::class, 'store']);
 Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
 Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+// route product
+Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::get('/customers/create', [CustomerController::class, 'create']);
+Route::post('/customer', [CustomerController::class, 'store']);
+Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::post('/customers/{id}/update', [CustomerController::class, 'update'])->name('customers.update');
+Route::delete('/customer/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');

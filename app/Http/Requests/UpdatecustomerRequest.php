@@ -22,7 +22,17 @@ class UpdatecustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'email' => 'required|string',
+            'address' => 'nullable|string',
+            'phone' => 'nullable|string',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
         ];
     }
 }
