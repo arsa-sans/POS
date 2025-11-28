@@ -119,11 +119,11 @@
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img
-                  src="../../assets/img/arsanugas.jpg"
+                  src="../../assets/img/adminLTELogo.png"
                   class="user-image rounded-circle shadow"
                   alt="User Image"
                 />
-                <span class="d-none d-md-inline">Arsa Prayata</span>
+                <span class="d-none d-md-inline">{{ auth()->user()->name }}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
@@ -198,43 +198,43 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{ url('/home') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-box-arrow-up-left"></i>
                       <p>Dashboard</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/beranda') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-house-door"></i>
                       <p>Home</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/categories') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-folder"></i>
                       <p>Category</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/products') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-cart"></i>
                       <p>Product</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/customers') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-person"></i>
                       <p>Customers</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/report/daily') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-calendar-check"></i>
                       <p>Report</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href=" {{ url('/') }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                      <i class="nav-icon bi bi-power"></i>
                       <p>Logout</p>
                     </a>
                   </li>
